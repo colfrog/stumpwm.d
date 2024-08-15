@@ -15,10 +15,10 @@
 	       "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
 
 ;; Fonts
-;;(ql:quickload "clx-truetype")
-;;(load-module "ttf-fonts")
-;;(xft:cache-fonts)
-;;(set-font (make-instance 'xft:font :family "Hack" :subfamily "Regular" :size 11 :antialias t))
+(ql:quickload "clx-truetype")
+(load-module "ttf-fonts")
+(xft:cache-fonts)
+(set-font (make-instance 'xft:font :family "Hack" :subfamily "Regular" :size 8 :antialias t))
 
 ;; Prefix
 (set-prefix-key (kbd "s-t"))
@@ -52,13 +52,39 @@
 ;; Compositing
 (run-shell-command "picom --vsync")
 
+;; Colours
+(set-bg-color "#2e0063")
+(set-fg-color "#fff04c")
+(set-border-color "#2e0063")
+(setf *mode-line-background-color* "#2e0063")
+(setf *mode-line-foreground-color* "#fff04c")
+
+(toggle-mode-line (current-screen) (current-head))
+
+;; Message window
+(setf *message-window-gravity* :center)
+
 ;; Modeline
+(defcommand toggle-modeline () ()
+  (toggle-mode-line (current-screen) (current-head)))
+(define-key *root-map* (kbd "C-m") "toggle-modeline")
+
 (load-module "battery-portable")
 (setf *screen-mode-line-format* (list "[^B%n^b] %W^>%B %d"))
 (setf *window-format* "%m%n%s%c")
 (setf *time-modeline-string* "%a %b %e %k:%M")
 (setf *mode-line-timeout* 1)
 (enable-mode-line (current-screen) (current-head) t)
+
+;; Gaps
+(load-module "swm-gaps")
+(setf swm-gaps:*inner-gaps-size* 4)
+(setf swm-gaps:*outer-gaps-size* 8)
+(setf swm-gaps:*head-gaps-size* 0)
+(unless swm-gaps:*gaps-on*
+  (eval-command "toggle-gaps"))
+
+(define-key *root-map* (kbd "C-.") "toggle-gaps")
 
 ;; Wallpaper
 (run-shell-command "/home/laurent/.fehbg")
