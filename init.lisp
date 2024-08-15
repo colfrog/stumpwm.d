@@ -85,5 +85,9 @@
 
 (define-key *root-map* (kbd "C-.") "toggle-gaps")
 
+;; Golden ratio
+(load-module "swm-golden-ratio")
+(define-key *root-map* (kbd "C-,") "toggle-golden-ratio")
+
 ;; Wallpaper
 (run-shell-command "/home/laurent/.fehbg")
