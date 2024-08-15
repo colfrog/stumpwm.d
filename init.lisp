@@ -81,8 +81,7 @@
 (setf swm-gaps:*inner-gaps-size* 4)
 (setf swm-gaps:*outer-gaps-size* 8)
 (setf swm-gaps:*head-gaps-size* 0)
-(unless swm-gaps:*gaps-on*
-  (eval-command "toggle-gaps"))
+(swm-gaps:toggle-gaps-on)
 
 (define-key *root-map* (kbd "C-.") "toggle-gaps")
 
