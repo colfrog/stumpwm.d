@@ -1,8 +1,3 @@
-;; Required imports
-(ql:quickload "clx")
-(ql:quickload "cl-ppcre")
-(ql:quickload "alexandria")
-
 ;; Swank
 ;; *prefix-key* ; swank will kick this off
 (load ".emacs.d/elpa/slime-20231112.2019/swank-loader.lisp")
